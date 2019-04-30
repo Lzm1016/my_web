@@ -20,12 +20,12 @@ class mysql_util(object):
             # 配置文件的真实目录
             path = os.path.dirname(os.path.dirname(__file__))
             self.filenames = os.path.join(path, self.filenames)
-            self.get_db_conf(self.filenames)
+            self._get_db_conf(self.filenames)
             self.conn_mysql(self.db_host, self.db_port, self.db_user, self.db_pass, self.db_database,
                             self.db_charset)
 
     # 使用conf配置文件连接msyql
-    def get_db_conf(self, filenames):
+    def _get_db_conf(self, filenames):
         self.conf.read(filenames)
         self.db_host = self.conf.get('db', 'db_host')
         self.db_port = self.conf.get('db', 'db_port')
@@ -45,3 +45,17 @@ class mysql_util(object):
     def insert_execute(self, insert_sql):
         self.cursor.execute(insert_sql)
         self.conn.commit()
+
+    # @list_to_dict
+    def get_data(self, tablename, *args):
+        columns = ','.join(args)
+        sql = 'select {} from {}'.format(columns, tablename)
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+        return result
+
+    def get_oneline(self, username):
+        sql = 'select username,password from users where username="{}"'.format(username)
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+        return result

@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.input_style {
+    width:300px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    margin: 10px 0;
+    text-indent: 10px;
+    font-size: 16px;
+}
+
+.button {
+    width: 80px;
+    height: 40px;
+    background: #009ad6;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    margin: 30px 35px;
+}
+#login {
+    width: 300px;
+    margin: 200px auto;
+}

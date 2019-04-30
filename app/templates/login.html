@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}" type="text/css">
+</head>
+<body>
+
+<form id='login' action="{{ login }}" method="post">
+    <input class='input_style' type='text' name="username" placeholder="请输入账号"/>
+    <br/>
+    <input class='input_style' type="password" name="password" placeholder="请输入密码"/>
+    <br/>
+    <input class="button" type="submit" value="登录"/><input class="button" type="button" value="注册"/>
+</form>
+
+
+</body>
+</html>

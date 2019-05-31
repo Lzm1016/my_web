@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed"
+                    data-target="#53f1e569bf1350be8704ac3f0958d2409887c1f0" data-toggle="collapse" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{{ url_for('main.index') }}"><span class="navbar-brand">博客</span></a>
+
+        </div>
+        <div class="navbar-collapse collapse" id="53f1e569bf1350be8704ac3f0958d2409887c1f0">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ url_for('main.index') }}" title="主页">主页</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('main.edit') }}">发表新文章 </a></li>
+                    <li><a href="{{ url_for('main.index',id=current_user.id) }}">{{ current_user.name }}</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">退出</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.login') }}">登录</a></li>
+                    <li><a href="{{ url_for('auth.register') }}">注册</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

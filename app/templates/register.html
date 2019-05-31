@@ -7,14 +7,6 @@
         <hr>
     </div>
     <div class="container">
-        {#        <form method="post">#}
-        {#            {{ csrf }}#}
-        {#            {{ form.username.label }}#}
-        {#            {{ form.username() }}#}
-        {#            {{ form.password.label }}#}
-        {#            {{ form.password() }}#}
-        {#            {{ form.submit() }}#}
-        {#        </form>#}
         {% for message in get_flashed_messages() %}
             <div class="alert-info">{{ message }} </div>
         {% endfor %}

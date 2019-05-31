@@ -5,8 +5,9 @@
 # @日期 : 2019年04月26日
 # @时间 : 18时23分
 
+from app import init_app
 
-from app import app
+app = init_app()
 
 if __name__ == '__main__':
     app.run(debug=True)

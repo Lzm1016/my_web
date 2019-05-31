@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}{{ title }}{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('main.static',filename = 'css/detail.css') }}">
+{% endblock %}
+
+{% block navbar %}
+    {% if current_user.is_authenticated and post.users_id == current_user.id %}
+        {% include 'includs/_postbar.html' %}
+    {% else %}
+        {{ super() }}
+    {% endif %}
+{% endblock navbar %}
+{% block content %}
+    <div class="container">
+        {#        {% if current_user.is_authenticated  %}#}
+        <h2>{{ post.title }}</h2>
+        <hr>
+        {#  Meta 信息 #}
+        <span>作者 : <a style="text-decoration: none"
+                      href="{{ url_for('main.index',id=post.users_id) }}">{{ post.users.name }}</a></span>
+        <br/>
+        <span>发表日期 : {{ post.created |format_time }}</span>
+        {#        <hr>#}
+        <div>
+            <h3>内容:</h3>
+            {{ post.body_html | safe }}
+        </div>
+        <hr>
+        {#   操作链接     #}
+        <h3 id="comments">评论 : </h3>
+        <p id="comp">评论数 : {{ post.comments |count }}</p>
+        {#  不是作者才可以发表评论  #}
+        {% if post.users_id != current_user.id and current_user.id %}
+
+            {#   发表评论     #}
+            <div>
+                {{ wtf.quick_form(form) }}
+            </div>
+        {% endif %}
+
+        {#   评论列表     #}
+        {% for comment in post.comments | sort(attribute='created',reverse=True) %}
+            <div class="media">
+                {#                <div class="media-left">#}
+                {#                    <img class="media-object" >#}
+                {#                </div>#}
+                <div class="media-body">
+                    <hr>
+                    <h4>
+                        <span>来自 : <a style="text-decoration: none"
+                                      href="{{ url_for('main.index',id=comment.users.id) }}">{{ comment.users.name }}</a></span>
+                        <span>{{ comment.created | format_time }}</span>
+                    </h4>
+                    <span>
+                        {{ comment.body }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    <div class="container">
+        {{ super() }}
+    </div>
+{% endblock %}

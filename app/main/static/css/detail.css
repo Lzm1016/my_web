@@ -1,0 +1,21 @@
+
+#comments {
+    display: inline;
+    /*width: 100px;*/
+    /*background-color: red !important;*/
+}
+
+#comp {
+    margin: 0 10px;
+    display: inline;
+}
+
+.conten_span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    /*width: 240px;*/
+    height: 200px;
+    display: block;
+}

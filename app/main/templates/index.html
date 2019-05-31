@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{#{% import '_marcos.html' as ui %}#}
+{% from "bootstrap/pagination.html" import render_pagination %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('main.static',filename = 'css/detail.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>{{ self.title() }}</h2>
+        <hr>
+    </div>
+    <div class="container">
+        {% if post %}
+            {# | sort(attribute='created',reverse=True) #}
+            {% for item in post %}
+                <h3><a style="text-decoration: none" href="{{ url_for('main.post',id=item.id) }}">{{ item.title }}</a>
+                </h3>
+                <span class="conten_span"><a style="text-decoration: none"
+                                             href="{{ url_for('main.post',id=item.id) }}">{{ item.body_html | safe }}</a></span>
+                <div>
+                    <p id="comp">作者 : <a href="{{ url_for('main.index',id=item.users_id) }}">{{ item.users.name }}</a></p>
+                    <p id="comp">发表时间 : {{ item.created | format_time }}</p>
+                    <p id="comp">评论数 : {{ item.comments |count }}</p>
+                </div>
+            {% endfor %}
+            <div>
+                {% if pagination %}
+                    {{ render_pagination(pagination) }}
+                {% endif %}
+            </div>
+        {% else %}
+            <h3>暂时没有文章发表<a style="text-decoration: none" href="{{ url_for('main.index') }}"> >> 主页</a></h3>
+        {% endif %}
+    </div>
+
+    {#    <div class="container">#}
+    {#        {{ ui.input('username') }}#}
+    {#        {{ ui.input('password',type='password') }}#}
+    {#    </div>#}
+
+
+{% endblock %}
+{% block footer %}
+    <div class="container">
+        {{ super() }}
+    </div>
+{% endblock %}

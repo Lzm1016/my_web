@@ -39,8 +39,8 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit() and not User.query.filter_by(name=form.username.data).first():
-        user = User(email=form.email.data, name=form.username.data, password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
+        # user = User(email=form.email.data, name=form.username.data, password=form.password.data)
+        # db.session.add(user)
+        # db.session.commit()
         return redirect(url_for('auth.login'))
     return render_template('register.html', title='注册', form=form)

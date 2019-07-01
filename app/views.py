@@ -46,41 +46,6 @@ def init_views(app, mysql):
 
         return redirect(url_for('login'))
 
-    # @login_manager.user_loader
-    # def load_user(user_id):
-    #     print("load_user---> %s " % user_id)
-    #     curr_user = User_mod()
-    #     curr_user.id = user_id
-    #
-    #     return curr_user
-
-    # @app.route('/test')
-    # def test():
-    #     curr_user = User_mod()
-    #     curr_user.userid = 123
-    #     curr_user.username = 'lzm'
-    #     # print(login_user(curr_user))
-    #     return render_template('login.html', title='测试', all_data=curr_user)
-
-    # @app.route("/index", endpoint='n1')
-    # # @app.before_request
-    # # @login_auth
-    # def idnex():
-    #     print(session)
-    #     return 'qweqw'
-
-    # @app.route('/index')
-    # def index():
-    #     return render_template('index.html', title='主页')
-    #
-    # @app.route('/login')
-    # def logins():
-    #     from app.auth.forms import LoginForm
-    #     form = LoginForm()
-    #     flash('登录成功')
-    #     return render_template('login.html', title='登录', form=form)
-
-
 def login_auth(fun):
     # @functools.wraps(fun)
     def login(*args, **kwargs):
